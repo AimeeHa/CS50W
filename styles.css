@@ -28,11 +28,22 @@ body {
   padding-right: 5px;
 }
 
-.searchBoxRoot input {
-  flex: 1;
+.search {
   display: flex;
-  padding: 5px 8px 0 14px;
-  margin-bottom: 5px;
+  flex-direction: row;
+  height: 500px;
+  align-items: center;
+}
+
+.searchBoxRoot {
+  width: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
 }
 
 .button {
@@ -41,11 +52,12 @@ body {
   border-radius: 4px;
   color: #e8eaed;
   line-height: 27px;
-  height: 36px;
   min-width: 54px;
   text-align: center;
   cursor: pointer;
   user-select: none;
+  margin-top: 15px;
+  padding: 5px 24px;
 }
 
 .searchBox {
