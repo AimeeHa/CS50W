@@ -1,3 +1,9 @@
+body {
+  background: #202124;
+  font-family: arial,sans-serif;
+  font-size: 14px;
+}
+
 .navbar {
   display: flex;
   align-items: flex-end;
@@ -5,12 +11,16 @@
   width: 100%;
 }
 
+.navbar a {
+  text-decoration: none;
+  color: white;
+}
+
 .navbarContainer {
   height: 50px;
   display: flex;
   align-items: center;
   width: 100%;
-  background-color: beige;
 }
 
 .navbar div {
@@ -18,8 +28,32 @@
   padding-right: 5px;
 }
 
-.searchBox {
+.searchBoxRoot input {
   flex: 1;
   display: flex;
   padding: 5px 8px 0 14px;
+  margin-bottom: 5px;
+}
+
+.button {
+  background-color: #303134;
+  border: 1px solid #303134;
+  border-radius: 4px;
+  color: #e8eaed;
+  line-height: 27px;
+  height: 36px;
+  min-width: 54px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.searchBox {
+  height: 44px;
+  background: #202124;
+  border: 1px solid #5f6368;
+  color: #bdc1c6;
+  box-shadow: none;
+  border-radius: 24px;
+  width: 500px;
 }
