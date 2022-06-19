@@ -46,6 +46,13 @@ body {
   align-items: center;
 }
 
+.btnRoot {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 18px;
+}
+
 .button {
   background-color: #303134;
   border: 1px solid #303134;
