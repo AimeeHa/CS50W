@@ -24,8 +24,7 @@ body {
 }
 
 .navbar div {
-  width: 10%;
-  padding-right: 5px;
+  padding-right: 24px;
 }
 
 .search {
