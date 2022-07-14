@@ -5,12 +5,17 @@
 {% endblock %}
 
 {% block body %}
-    <h1>All Pages</h1>
+    {% if entries|length > 0 %}
+        <h1>All Pages</h1>
 
-    <ul>
-        {% for entry in entries %}
-            <a href="wiki/{{entry}}">{{ entry|linebreaks }}</a>
-        {% endfor %}
-    </ul>
-
+        <ul>
+            {% for entry in entries %}
+                <a href="wiki/{{entry}}">{{ entry|linebreaks }}</a>
+            {% endfor %}
+       </ul>
+    
+   {% else%}
+       <h1>No matches</h1>
+   
+    {% endif %}
 {% endblock %}
