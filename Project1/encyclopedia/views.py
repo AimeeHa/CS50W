@@ -1,5 +1,6 @@
 from tkinter import Entry
 from django.shortcuts import redirect, render
+from django import forms
 
 from . import util
 
@@ -35,5 +36,12 @@ def search(request):
         return render(request, "encyclopedia/index.html", {"entries": results})
 
 
-def newpage(request):
-    return render(request, "encyclopedia/newpage.html")
+class NewPage(forms.Form):
+    pageTitle = forms.CharField(max_length=150)
+    pageContent = forms.CharField(
+        widget=forms.Textarea(attrs={"rows": 3, "cols": 5}),
+    )
+
+
+def create(request):
+    return render(request, "encyclopedia/newpage.html", {"newpage": NewPage()})
