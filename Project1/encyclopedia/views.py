@@ -1,6 +1,8 @@
 from tkinter import Entry
 from django.shortcuts import redirect, render
 from django import forms
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 
 from . import util
 
@@ -23,7 +25,11 @@ def title(request, title):
             {"content": content},
         )
     else:
-        return render(request, "encyclopedia/error.html")
+        return render(
+            request,
+            "encyclopedia/error.html",
+            {"error": "The requested page was not found."},
+        )
 
 
 def search(request):
@@ -44,4 +50,31 @@ class NewPage(forms.Form):
 
 
 def create(request):
+    entries = util.list_entries()
+    if request.method == "POST":
+        newentry = NewPage(request.POST)
+        if newentry.is_valid():
+            pageTitle = newentry.cleaned_data["pageTitle"]
+            pageContent = newentry.cleaned_data["pageContent"]
+            if str(pageTitle).upper() in entries:
+                return render(
+                    request,
+                    "encyclopedia/error.html",
+                    {"error": "This entry already exists."},
+                )
+            else:
+                file = open("entries/" + pageTitle + ".md", "w")
+                file.write("# " + pageTitle + "\n" + pageContent)
+                file.close()
+                return HttpResponseRedirect(reverse("newpage"))
+
+        else:
+            return render(
+                request,
+                "encyclopedia/newpage.html",
+                {
+                    "newpage.pageTitle": pageTitle,
+                    "newpage.pageContent": pageContent,
+                },
+            )
     return render(request, "encyclopedia/newpage.html", {"newpage": NewPage()})

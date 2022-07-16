@@ -6,7 +6,7 @@
 
 {% block body %}
     <h2>Create New Page</h2>
-    <form action="{% url 'newpage' %}" method="post">
+    <form action="/newpage" method="POST">
         {% csrf_token %}
         <p>Title of your New Page:</p>
         {{ newpage.pageTitle |linebreaks }}
@@ -16,4 +16,5 @@
         <input type="submit" style="margin-top: 16px">
     </form>
      
+
 {% endblock %}
