@@ -36,3 +36,15 @@ textarea {
 .sidebar h2 {
     margin-top: 5px;
 }
+
+.button {
+  background-color: #303134;
+  border: 1px solid #303134;
+  border-radius: 4px;
+  color: #e8eaed;
+  line-height: 27px;
+  min-width: 54px;
+  text-align: center;
+  margin-top: 24px;
+  padding: 5px 24px;
+}

@@ -1,0 +1,23 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Create New Page
+{% endblock %}
+
+{% block body %}
+    
+    <p>Title of your New Page</p>
+    <form>
+      <input type="text" name="title" placeholder="Page Title">
+    </form>
+
+    <p style="margin-top:42px"><label for="content">Content of your New Page:</label></p>
+    <textarea id="content" name="content" style="width: 80%; height:30%">
+    Enter the Markdown content here. 
+    </textarea>
+
+    <div style="margin-top:16px">
+      <input class="button" type="submit" value="Save">
+    </div>    
+
+{% endblock %}

@@ -33,3 +33,7 @@ def search(request):
     else:
         results = [entry for entry in entries if query.upper() in entry.upper()]
         return render(request, "encyclopedia/index.html", {"entries": results})
+
+
+def newpage(request):
+    return render(request, "encyclopedia/newpage.html")
