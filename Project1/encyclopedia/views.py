@@ -22,7 +22,7 @@ def title(request, title):
         return render(
             request,
             "encyclopedia/titles.html",
-            {"content": content},
+            {"content": content, "title": title},
         )
     else:
         return render(
@@ -66,7 +66,7 @@ def create(request):
                 file = open("entries/" + pageTitle + ".md", "w")
                 file.write("# " + pageTitle + "\n" + pageContent)
                 file.close()
-                return HttpResponseRedirect(reverse("newpage"))
+                return redirect("wiki/" + pageTitle)
 
         else:
             return render(
@@ -78,3 +78,18 @@ def create(request):
                 },
             )
     return render(request, "encyclopedia/newpage.html", {"newpage": NewPage()})
+
+
+# class Edit(forms.Form):
+#     textarea = forms.CharField(widget=forms.Textarea(), attrs={"rows": 3, "cols": 5})
+
+
+def edit(request):
+    entries = util.list_entries()
+    up_entries = [entry.upper() for entry in entries]
+
+    if request.method == "POST":
+        title = request.POST["title"]
+        if title.upper() in up_entries:
+
+            return render(request, "encyclopedia/edit.html", {"title": title})
