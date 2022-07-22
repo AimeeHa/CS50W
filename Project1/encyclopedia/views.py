@@ -1,4 +1,4 @@
-from tkinter import Entry
+from tkinter import Entry, Label
 from django.shortcuts import redirect, render
 from django import forms
 from django.urls import reverse
@@ -64,7 +64,7 @@ def create(request):
                 )
             else:
                 file = open("entries/" + pageTitle + ".md", "w")
-                file.write("# " + pageTitle + "\n" + pageContent)
+                file.write(pageContent)
                 file.close()
                 return redirect("wiki/" + pageTitle)
 
@@ -80,16 +80,23 @@ def create(request):
     return render(request, "encyclopedia/newpage.html", {"newpage": NewPage()})
 
 
-# class Edit(forms.Form):
-#     textarea = forms.CharField(widget=forms.Textarea(), attrs={"rows": 3, "cols": 5})
+class Edit(forms.Form):
+    textarea = forms.CharField(
+        widget=forms.Textarea(attrs={"rows": 3, "cols": 5}), label=""
+    )
 
 
-def edit(request):
-    entries = util.list_entries()
-    up_entries = [entry.upper() for entry in entries]
-
+def edit(request, title):
+    content = util.get_entry(title)
     if request.method == "POST":
-        title = request.POST["title"]
-        if title.upper() in up_entries:
+        form = Edit(request.POST)
+        if form.is_valid():
+            new_content = form.cleaned_data["textarea"]
+            util.save_entry(title, new_content)
+            return redirect("/wiki/" + title)
 
-            return render(request, "encyclopedia/edit.html", {"title": title})
+    return render(
+        request,
+        "encyclopedia/edit.html",
+        {"content": Edit(initial={"textarea": content}), "title": title},
+    )
