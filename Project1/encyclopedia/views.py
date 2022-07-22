@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect
 from . import util
 
 import markdown2
+import random
 
 
 def index(request):
@@ -99,4 +100,15 @@ def edit(request, title):
         request,
         "encyclopedia/edit.html",
         {"content": Edit(initial={"textarea": content}), "title": title},
+    )
+
+
+def rand(request):
+    entries = util.list_entries()
+    title = random.choice(entries)
+    content = markdown2.markdown(util.get_entry(title))
+    return render(
+        request,
+        "encyclopedia/random.html",
+        {"title": title, "content": content},
     )
